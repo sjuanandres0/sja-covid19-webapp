@@ -1,4 +1,4 @@
-from worldbankapp import app
+from myapp import app
 
 import json, plotly
 from flask import render_template, request, Response, jsonify
