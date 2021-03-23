@@ -59,7 +59,7 @@ def return_figures():
     df['date'] = pd.to_datetime(df['date']) 
     co_focus = ['Argentina', 'Netherlands', 'United Kingdom', 'Spain', 'United States', 
                          'Turkey','India', 'Ireland', 'Vietnam','Brazil','Uruguay','Chile',
-                         'Northern Ireland','Mexico','Germany']
+                         'Northern Ireland','Mexico','Germany','Ukraine']
     df = df[df.location.isin(co_focus)]
 
     graph_three = []
@@ -84,7 +84,7 @@ def return_figures():
     df['date'] = pd.to_datetime(df['date']) 
     co_focus = ['Argentina', 'Netherlands', 'United Kingdom', 'Spain', 'United States', 
                          'Turkey','India', 'Ireland', 'Vietnam','Brazil','Uruguay','Chile',
-                         'Northern Ireland','Mexico','Germany']
+                         'Northern Ireland','Mexico','Germany','Ukraine']
     df = df[df.location.isin(co_focus)]
 
     graph_four = []
