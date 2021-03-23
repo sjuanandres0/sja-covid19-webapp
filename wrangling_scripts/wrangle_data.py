@@ -54,18 +54,27 @@ def return_figures():
 
 
 # third chart plots percent of population that is rural from 1990 to 2015
-    graph_three = []
-    graph_three.append(
-      go.Scatter(
-      x = [5, 4, 3, 2, 1, 0],
-      y = [0, 2, 4, 6, 8, 10],
-      mode = 'lines'
-      )
-    )
+    df = pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv')
+    df = df[df.iso_code.apply(lambda x: x[:5]!='OWID_')].copy()
+    df['date'] = pd.to_datetime(df['date']) 
+    co_focus = ['Argentina', 'Netherlands', 'United Kingdom', 'Spain', 'United States', 
+                         'Turkey','India', 'Ireland', 'Vietnam','Brazil','Uruguay','Chile',
+                         'Northern Ireland','Mexico','Germany']
+    df = df[df.location.isin(co_focus)]
 
-    layout_three = dict(title = 'Chart Three',
-                xaxis = dict(title = 'x-axis label'),
-                yaxis = dict(title = 'y-axis label')
+    graph_three = []
+    for country in co_focus:
+        graph_three.append(
+          go.Scatter(
+          x = df[df['location']==country]['date'],
+          y = df[df['location']==country]['daily_vaccinations'],
+          mode = 'lines'
+          )
+        )
+
+    layout_three = dict(title = '<b>Co-Focus Daily Vaccinations</b>',
+                xaxis = dict(title = 'Date'),
+                yaxis = dict(title = 'Daily Vaccinations')
                        )
     
 # fourth chart shows rural population vs arable land
