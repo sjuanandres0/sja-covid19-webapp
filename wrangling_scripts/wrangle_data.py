@@ -68,29 +68,40 @@ def return_figures():
           go.Scatter(
           x = df[df['location']==country]['date'],
           y = df[df['location']==country]['daily_vaccinations'],
-          mode = 'lines'
+          mode = 'lines',
+          name = country
           )
         )
 
-    layout_three = dict(title = '<b>Co-Focus Daily Vaccinations</b>',
+    layout_three = dict(title = '<b>Focus Countries Daily Vaccinations</b>',
                 xaxis = dict(title = 'Date'),
                 yaxis = dict(title = 'Daily Vaccinations')
                        )
     
 # fourth chart shows rural population vs arable land
+    df = pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv')
+    df = df[df.iso_code.apply(lambda x: x[:5]!='OWID_')].copy()
+    df['date'] = pd.to_datetime(df['date']) 
+    co_focus = ['Argentina', 'Netherlands', 'United Kingdom', 'Spain', 'United States', 
+                         'Turkey','India', 'Ireland', 'Vietnam','Brazil','Uruguay','Chile',
+                         'Northern Ireland','Mexico','Germany']
+    df = df[df.location.isin(co_focus)]
+
     graph_four = []
     
-    graph_four.append(
-      go.Scatter(
-      x = [20, 40, 60, 80],
-      y = [10, 20, 30, 40],
-      mode = 'markers'
-      )
-    )
+    for country in co_focus:
+        graph_four.append(
+          go.Scatter(
+          x = df[df['location']==country]['date'],
+          y = df[df['location']==country]['total_vaccinations_per_hundred'],
+          mode = 'lines',
+          name = country
+          )
+        )
 
-    layout_four = dict(title = 'Chart Four',
-                xaxis = dict(title = 'x-axis label'),
-                yaxis = dict(title = 'y-axis label'),
+    layout_four = dict(title = '<b>Focus Countries Daily Vaccinations per Hundred</b>',
+                xaxis = dict(title = 'Date'),
+                yaxis = dict(title = 'Daily Vaccinations per Hundred'),
                 )
     
     # append all charts to the figures list
