@@ -8,6 +8,6 @@ The goal is to gain practice with:
 2. Python, Plotly, Pandas, Numpy
 3. GitHub
 4. HTML, CSS, Flask, jQuery
-5. And more...\
-Feel free to suggest anything!\
+5. And more...
+\Feel free to suggest anything!\
 Cheers, Juan
